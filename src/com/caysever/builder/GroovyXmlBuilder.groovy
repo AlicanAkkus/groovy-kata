@@ -1,15 +1,15 @@
 package com.caysever.xml
 
+import com.caysever.builder.RecordsUtil
 import groovy.xml.DOMBuilder
 import groovy.xml.MarkupBuilder
 import groovy.xml.dom.DOMCategory
 
-class GroovyXml {
+class GroovyXmlBuilder {
 
     static void main(String[] args) {
 
-        def cars = [new Car('Hyunadi', 'i30', 2011, 130_000L, 180),
-                    new Car('Volvo', 'S60', 2014, 180_000L, 240)] as LinkedList
+        def cars = RecordsUtil.records()
         def writer = new StringWriter()
         def xml = new MarkupBuilder(writer)
 
@@ -42,33 +42,5 @@ class GroovyXml {
             assert newRecords.car.size() == 2
         }
 
-    }
-
-    static class Car {
-        def name
-        def model
-        def year
-        def km
-        def maxSpeed
-
-        Car(name, model, year, km, maxSpeed) {
-            this.name = name
-            this.model = model
-            this.year = year
-            this.km = km
-            this.maxSpeed = maxSpeed
-        }
-
-
-        @Override
-        public String toString() {
-            return "Car{" +
-                    "name=" + name +
-                    ", model=" + model +
-                    ", year=" + year +
-                    ", km=" + km +
-                    ", maxSpeed=" + maxSpeed +
-                    '}';
-        }
     }
 }
